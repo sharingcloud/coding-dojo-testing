@@ -1,0 +1,12 @@
+# IDE configuration
+/.vscode
+
+# Python
+__pycache__
+/venv
+
+# mdbook
+_guide_src/mdbook.exe
+
+# Django
+db.sqlite3

@@ -1,0 +1,6 @@
+[book]
+title = "Coding Dojo - Testing"
+author = "Denis BOURGE"
+description = "Testing!"
+multilingual = false
+src = "src"
