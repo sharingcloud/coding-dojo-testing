@@ -1,0 +1,20 @@
+{% extends "testme/_base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+<header>
+  <div class="title">Testme</div>
+  <div class="subtitle">Home page</div>
+  {% csrf_token %}
+
+  <div class="content">
+    <p>Welcome, {{ request.user.username }}.</p>
+    <p class="counter">{{ profile.clicks }} click(s)</p>
+
+    <button class="clickme" onclick="clickme('{% url 'api-clickme' %}')">
+      Click me
+    </button>
+  </div>
+</header>
+{% endblock body %}

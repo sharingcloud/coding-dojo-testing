@@ -1,5 +1,6 @@
 # IDE configuration
 /.vscode
+.pytest_cache
 
 # Python
 __pycache__
@@ -10,3 +11,7 @@ _guide_src/mdbook.exe
 
 # Django
 db.sqlite3
+
+# Coverage files
+.coverage
+htmlcov

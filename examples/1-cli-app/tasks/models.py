@@ -79,8 +79,6 @@ class TaskManager:
 
     def show_task(self, task_id):
         """Show task."""
-        secret = b"amVfc3Vpc191bl9jb2RlX3NlY3JldF9sb25nX2V0X2NhY2jDqV9wZXJzb25uZV9uZV9tZV90cm91dmVyYQ==" # noqa
-
         try:
             task = self.get_task(task_id)
             print()
@@ -157,7 +155,7 @@ class TaskManager:
 
     def show_stats(self):
         """Show stats. Contains an error."""
-        keys = len(self.task_index.keys())
+        keys = self.task_index.keys()
         total_count = len(keys)
         done_count = sum(1 for k in keys if self.task_index[k].done)
         remaining_count = total_count - done_count
