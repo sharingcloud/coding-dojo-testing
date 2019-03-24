@@ -37,6 +37,13 @@ class SeleniumWrapper(object):
         """Navigate to URLs."""
         self.inner.get(f"{self.base_url}{url}")
 
+    def find_element_by_css_selector(self, css_query):
+        """Find element by CSS selector."""
+        try:
+            return self.inner.find_element_by_css_selector(css_query)
+        except NoSuchElementException:
+            return None
+
     ################
     # Wait functions
 
