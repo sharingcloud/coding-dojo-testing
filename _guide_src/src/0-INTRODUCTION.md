@@ -5,6 +5,7 @@ Bienvenue sur la session de Coding Dojo à propos du testing !
 ## Prérequis
 
 - Python 3 et pip (au moins 3.6)
+- Google Chrome
 - Un terminal
 
 ## 1. Préparation
@@ -49,3 +50,15 @@ D'ici, on peut installer les paquets nécessaires:
 ```bash
 > pip install -r requirements.txt
 ```
+
+## 2. Chromedriver
+
+On va aborder les tests end-to-end lors de ce dojo, et pour ce faire on va utiliser l'outil `selenium` (rapatrié dans les `requirements`).
+
+Selenium va piloter une instance de navigateur via son *webdriver*. Dans le cadre de ce dojo, on va se concentrer sur Google Chrome et sur le `chromedriver`.
+
+Voici un lien vers [chromedriver 2.46](https://chromedriver.storage.googleapis.com/2.46/chromedriver_win32.zip).
+
+Il faut ensuite le décompresser dans un emplacement accessible depuis un terminal (dans le PATH). Pour faire simple, j'ai juste mis le driver dans `C:\Windows\system32`, un peu sale mais fonctionnel.
+
+Pour tester, tapez `chromedriver` depuis cmd ou Powershell, ça devrait fonctionner.

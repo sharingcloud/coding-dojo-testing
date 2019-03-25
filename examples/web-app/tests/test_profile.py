@@ -1,5 +1,7 @@
 """Test profile."""
 
+import os
+
 from testme.models import Profile
 
 
@@ -35,3 +37,22 @@ def test_profile_reset_clicks(ex_profile_factory):
     # Create a profile with 1000 initial clicks
     # The reset_clicks should reset clicks to 0
     pass
+
+
+# TODO: Continue the test
+def test_profile_clicks_to_stream(ex_profile_factory, tmpdir):
+    # Create a new profile
+    profile: Profile = ex_profile_factory("test", 50)
+    # Create a temporary directory
+    # Create a file in this directory
+    path_to_file = os.path.join(tmpdir, "example.bin")
+    # Open the file
+    with open(path_to_file, mode="wb") as stream:
+        # Save the clicks to the stream
+        profile.save_to_stream(stream)
+
+    # Create another profile with more clicks
+    # Open the previous file
+    # load the clicks from the stream
+
+    # Assert that the two profiles are the same
