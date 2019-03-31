@@ -9,3 +9,10 @@ C'est une application très pauvre fonctionnellement, on peut juste s'enregistre
 ![clicks](./images/clicks.png)
 
 Le but premier de cette application est d'utiliser `pytest`.
+
+Pour démarrer l'application, il faut avoir chargé le virtualenv puis:
+
+```bash
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
+```

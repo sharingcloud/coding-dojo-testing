@@ -62,3 +62,12 @@ Voici un lien vers [chromedriver 2.46](https://chromedriver.storage.googleapis.c
 Il faut ensuite le décompresser dans un emplacement accessible depuis un terminal (dans le PATH). Pour faire simple, j'ai juste mis le driver dans `C:\Windows\system32`, un peu sale mais fonctionnel.
 
 Pour tester, tapez `chromedriver` depuis cmd ou Powershell, ça devrait fonctionner.
+
+## 3. Documentation
+
+Pour la documentation autour de `pytest`, je recommande:
+
+- le [site officiel](https://docs.pytest.org/en/latest/getting-started.html)
+- la doc du module [pytest-django](https://pytest-django.readthedocs.io/en/latest/)
+- le livre [TDD with Python](https://books.sharingdev.com/read/120/pdf), pour un guide complet autour du testing en Python
+- et le livre [Python Testing with pytest](https://books.sharingdev.com/read/161/pdf), pour un guide autour de Pytest

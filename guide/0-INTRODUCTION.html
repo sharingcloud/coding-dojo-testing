@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="0-INTRODUCTION.html" class="active">Introduction</a></li></ol>
+            <ol class="chapter"><li class="affix"><a href="0-INTRODUCTION.html" class="active">Introduction</a></li><li><a href="1-OVERVIEW.html"><strong aria-hidden="true">1.</strong> Aperçu de l'application</a></li><li><a href="2-TESTING.html"><strong aria-hidden="true">2.</strong> Les types de tests</a></li><li><a href="3-PYTEST.html"><strong aria-hidden="true">3.</strong> Pytest</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -141,6 +141,7 @@
 <a class="header" href="#prérequis" id="prérequis"><h2>Prérequis</h2></a>
 <ul>
 <li>Python 3 et pip (au moins 3.6)</li>
+<li>Google Chrome</li>
 <li>Un terminal</li>
 </ul>
 <a class="header" href="#a1-préparation" id="a1-préparation"><h2>1. Préparation</h2></a>
@@ -168,6 +169,20 @@ Un <em>virtualenv</em> est une sorte d'installation Python <em>indépendante</em
 <p>D'ici, on peut installer les paquets nécessaires:</p>
 <pre><code class="language-bash">&gt; pip install -r requirements.txt
 </code></pre>
+<a class="header" href="#a2-chromedriver" id="a2-chromedriver"><h2>2. Chromedriver</h2></a>
+<p>On va aborder les tests end-to-end lors de ce dojo, et pour ce faire on va utiliser l'outil <code>selenium</code> (rapatrié dans les <code>requirements</code>).</p>
+<p>Selenium va piloter une instance de navigateur via son <em>webdriver</em>. Dans le cadre de ce dojo, on va se concentrer sur Google Chrome et sur le <code>chromedriver</code>.</p>
+<p>Voici un lien vers <a href="https://chromedriver.storage.googleapis.com/2.46/chromedriver_win32.zip">chromedriver 2.46</a>.</p>
+<p>Il faut ensuite le décompresser dans un emplacement accessible depuis un terminal (dans le PATH). Pour faire simple, j'ai juste mis le driver dans <code>C:\Windows\system32</code>, un peu sale mais fonctionnel.</p>
+<p>Pour tester, tapez <code>chromedriver</code> depuis cmd ou Powershell, ça devrait fonctionner.</p>
+<a class="header" href="#a3-documentation" id="a3-documentation"><h2>3. Documentation</h2></a>
+<p>Pour la documentation autour de <code>pytest</code>, je recommande:</p>
+<ul>
+<li>le <a href="https://docs.pytest.org/en/latest/getting-started.html">site officiel</a></li>
+<li>la doc du module <a href="https://pytest-django.readthedocs.io/en/latest/">pytest-django</a></li>
+<li>le livre <a href="https://books.sharingdev.com/read/120/pdf">TDD with Python</a>, pour un guide complet autour du testing en Python</li>
+<li>et le livre <a href="https://books.sharingdev.com/read/161/pdf">Python Testing with pytest</a>, pour un guide autour de Pytest</li>
+</ul>
 
                     </main>
 
@@ -175,6 +190,10 @@ Un <em>virtualenv</em> est une sorte d'installation Python <em>indépendante</em
                         <!-- Mobile navigation buttons -->
                         
 
+                        
+                            <a rel="next" href="1-OVERVIEW.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -185,6 +204,10 @@ Un <em>virtualenv</em> est une sorte d'installation Python <em>indépendante</em
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
 
+                
+                    <a href="1-OVERVIEW.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
