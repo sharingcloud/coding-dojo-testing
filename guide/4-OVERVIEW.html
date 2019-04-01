@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="0-INTRODUCTION.html">Introduction</a></li><li><a href="1-OVERVIEW.html" class="active"><strong aria-hidden="true">1.</strong> Aperçu de l'application</a></li><li><a href="2-TESTING.html"><strong aria-hidden="true">2.</strong> Les types de tests</a></li><li><a href="3-PYTEST.html"><strong aria-hidden="true">3.</strong> Pytest</a></li></ol>
+            <ol class="chapter"><li class="affix"><a href="0-INTRODUCTION.html">Introduction</a></li><li><a href="1-INSTALLING.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="2-TESTING.html"><strong aria-hidden="true">2.</strong> Les types de tests</a></li><li><a href="3-PYTEST.html"><strong aria-hidden="true">3.</strong> L'outil Pytest</a></li><li><a href="4-OVERVIEW.html" class="active"><strong aria-hidden="true">4.</strong> Aperçu de l'application</a></li><li><a href="5-YOUR-TURN.html"><strong aria-hidden="true">5.</strong> A votre tour</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -136,29 +136,63 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#section-1---aperçu-de-lapplication" id="section-1---aperçu-de-lapplication"><h1>Section 1 - Aperçu de l'application</h1></a>
-<p>Dans le cadre de ce dojo, on va directement expérimenter sur une application Django.</p>
+                        <a class="header" href="#section-4---aperçu-de-lapplication" id="section-4---aperçu-de-lapplication"><h1>Section 4 - Aperçu de l'application</h1></a>
+<p>On va maintenant expérimenter sur une application Django.</p>
 <p>Elle est disponible dans le dossier <code>examples/web-app</code>.</p>
 <p>C'est une application très pauvre fonctionnellement, on peut juste s'enregistrer/se connecter et incrémenter son compteur de clicks avec un bouton.</p>
 <p><img src="./images/clicks.png" alt="clicks" /></p>
 <p>Le but premier de cette application est d'utiliser <code>pytest</code>.</p>
-<p>Pour démarrer l'application, il faut avoir chargé le virtualenv puis:</p>
+<p>Pour démarrer l'application, il faut avoir chargé le virtualenv, aller dans le dossier <code>examples/web-app</code> puis:</p>
 <pre><code class="language-bash">python manage.py migrate
 python manage.py runserver 0.0.0.0:8000
 </code></pre>
+<p>Faites le tour des fonctionnalités de l'application, puis exécutez les tests:</p>
+<pre><code class="language-bash">pytest
+</code></pre>
+<p>Vous devriez avoir un résultat de ce type, avec des tests qui plantent:</p>
+<pre><code>(venv) PS C:\Users\...\web-app&gt; pytest
+=============================================== test session starts ================================================
+platform win32 -- Python 3.7.1, pytest-4.3.1, py-1.8.0, pluggy-0.9.0 -- c:\users\...\python.exe
+cachedir: .pytest_cache
+Django settings: testme_project.settings (from ini file)
+rootdir: C:\Users\...\web-app, inifile: pytest.ini
+plugins: pythonpath-0.7.3, django-3.4.8, cov-2.6.1
+collected 10 items
+run-last-failure: rerun previous 5 failures first
+
+tests/test_api.py::test_api_addme FAILED                                                                      [ 10%]
+tests/test_api.py::test_api_base64me FAILED                                                                   [ 20%]
+tests/test_profile.py::test_profile_reset_clicks FAILED                                                       [ 30%]
+tests/test_profile.py::test_profile_clicks_to_stream FAILED                                                   [ 40%]
+tests/e2e/test_e2e.py::test_home
+DevTools listening on ws://127.0.0.1:18187/devtools/browser/fa679536-3af4-4b06-beb9-ef09bfb9c0db
+FAILED                                                                       [ 50%]
+tests/test_api.py::test_api_clickme PASSED                                                                    [ 60%]
+tests/test_profile.py::test_profile_default PASSED                                                            [ 70%]
+tests/test_profile.py::test_profile_zero_clicks PASSED                                                        [ 80%]
+tests/test_profile.py::test_profile_add_click PASSED                                                          [ 90%]
+tests/e2e/test_e2e.py::test_login
+DevTools listening on ws://127.0.0.1:18214/devtools/browser/bde370e3-4913-497b-a571-c38be8cfa536
+PASSED                                                                      [100%]
+
+...
+</code></pre>
+<p>Il est possible que vos tests ne soient pas exécutés dans le même ordre, mais c'est pas bien grave.</p>
+<p>A la suite de ces lignes de résumé, vous devez avoir un petit tas d'erreurs avec du contexte, plantant à chaque fois sur un <code>assert False</code>.</p>
+<p>Prenez le temps de regarder la définition de ces tests pour bien comprendre comment tout fonctionne.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="0-INTRODUCTION.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="3-PYTEST.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="2-TESTING.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="5-YOUR-TURN.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -170,13 +204,13 @@ python manage.py runserver 0.0.0.0:8000
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="0-INTRODUCTION.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="3-PYTEST.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="2-TESTING.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="5-YOUR-TURN.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

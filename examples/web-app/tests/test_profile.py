@@ -36,7 +36,7 @@ def test_profile_reset_clicks(ex_profile_factory):
 
     # Create a profile with 1000 initial clicks
     # The reset_clicks should reset clicks to 0
-    pass
+    assert False
 
 
 # TODO: Continue the test
@@ -56,3 +56,4 @@ def test_profile_clicks_to_stream(ex_profile_factory, tmpdir):
     # load the clicks from the stream
 
     # Assert that the two profiles are the same
+    assert False

@@ -48,4 +48,4 @@ def test_home(auth_browser):
 
     # Wait for 0.5 sec
     # Shown clicks should be at 2
-    pass
+    assert False

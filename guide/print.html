@@ -72,7 +72,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="0-INTRODUCTION.html">Introduction</a></li><li><a href="1-OVERVIEW.html"><strong aria-hidden="true">1.</strong> Aperçu de l'application</a></li><li><a href="2-TESTING.html"><strong aria-hidden="true">2.</strong> Les types de tests</a></li><li><a href="3-PYTEST.html"><strong aria-hidden="true">3.</strong> Pytest</a></li></ol>
+            <ol class="chapter"><li class="affix"><a href="0-INTRODUCTION.html">Introduction</a></li><li><a href="1-INSTALLING.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><a href="2-TESTING.html"><strong aria-hidden="true">2.</strong> Les types de tests</a></li><li><a href="3-PYTEST.html"><strong aria-hidden="true">3.</strong> L'outil Pytest</a></li><li><a href="4-OVERVIEW.html"><strong aria-hidden="true">4.</strong> Aperçu de l'application</a></li><li><a href="5-YOUR-TURN.html"><strong aria-hidden="true">5.</strong> A votre tour</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -144,6 +144,20 @@
 <li>Google Chrome</li>
 <li>Un terminal</li>
 </ul>
+<p>Voici le plan</p>
+<ul>
+<li><a href="./1-INSTALLING.html">Installation</a></li>
+<li><a href="./2-TESTING.html">Les types de tests</a></li>
+<li><a href="./3-PYTEST.html">L'outil Pytest</a></li>
+<li><a href="./4-OVERVIEW.html">Aperçu de l'application</a></li>
+</ul>
+<a class="header" href="#section-1---installation" id="section-1---installation"><h1>Section 1 - Installation</h1></a>
+<a class="header" href="#prérequis-1" id="prérequis-1"><h2>Prérequis</h2></a>
+<ul>
+<li>Python 3 et pip (au moins 3.6)</li>
+<li>Google Chrome</li>
+<li>Un terminal</li>
+</ul>
 <a class="header" href="#a1-préparation" id="a1-préparation"><h2>1. Préparation</h2></a>
 <p>Pour commencer, on va installer tout ce qu'il faut.</p>
 <p>Pour utiliser des paquets Python sans écraser l'environnement système, on va utiliser un <strong>virtualenv</strong>.
@@ -183,16 +197,6 @@ Un <em>virtualenv</em> est une sorte d'installation Python <em>indépendante</em
 <li>le livre <a href="https://books.sharingdev.com/read/120/pdf">TDD with Python</a>, pour un guide complet autour du testing en Python</li>
 <li>et le livre <a href="https://books.sharingdev.com/read/161/pdf">Python Testing with pytest</a>, pour un guide autour de Pytest</li>
 </ul>
-<a class="header" href="#section-1---aperçu-de-lapplication" id="section-1---aperçu-de-lapplication"><h1>Section 1 - Aperçu de l'application</h1></a>
-<p>Dans le cadre de ce dojo, on va directement expérimenter sur une application Django.</p>
-<p>Elle est disponible dans le dossier <code>examples/web-app</code>.</p>
-<p>C'est une application très pauvre fonctionnellement, on peut juste s'enregistrer/se connecter et incrémenter son compteur de clicks avec un bouton.</p>
-<p><img src="./images/clicks.png" alt="clicks" /></p>
-<p>Le but premier de cette application est d'utiliser <code>pytest</code>.</p>
-<p>Pour démarrer l'application, il faut avoir chargé le virtualenv puis:</p>
-<pre><code class="language-bash">python manage.py migrate
-python manage.py runserver 0.0.0.0:8000
-</code></pre>
 <a class="header" href="#section-2---les-types-de-tests" id="section-2---les-types-de-tests"><h1>Section 2 - Les types de tests</h1></a>
 <p>Avant de commencer à tester, on va voir différents types de tests (plus d'infos sur <a href="https://sharingcloud.atlassian.net/wiki/spaces/SKB/pages/859439125/1.3.+Tests+et+couverture">le wiki</a>).</p>
 <a class="header" href="#a1-tests-unitaires" id="a1-tests-unitaires"><h2>1. Tests unitaires</h2></a>
@@ -218,8 +222,443 @@ python manage.py runserver 0.0.0.0:8000
   element = browser.find_element_by_css_selector(&quot;#my-elem&quot;)
   assert element.value == &quot;my-value&quot;
 </code></pre>
-<a class="header" href="#section-3---pytest" id="section-3---pytest"><h1>Section 3 - Pytest</h1></a>
-<p>Pour ceux qui connaissent déja le module <code>unittest</code> fourni de base avec Python, vous vous demandez sûrement pourquoi <code>pytest</code> et pas <code>unittest</code> ? C'est ce qu'on va voir tout de suite.</p>
+<a class="header" href="#section-3---loutil-pytest" id="section-3---loutil-pytest"><h1>Section 3 - L'outil Pytest</h1></a>
+<p>Pour ceux qui connaissent déja le module <code>unittest</code> fourni de base avec Python, vous vous demandez sûrement pourquoi <code>pytest</code> et pas <code>unittest</code> ?</p>
+<p>C'est ce qu'on va voir tout de suite, et on peut commencer par l'article de Sam &amp; Max: <a href="http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-3/">http://sametmax.com/un-gros-guide-bien-gras-sur-les-tests-unitaires-en-python-partie-3/</a>.</p>
+<p>On va travailler dans le dossier <code>examples/simple</code>.</p>
+<a class="header" href="#a1-ecrire-un-test" id="a1-ecrire-un-test"><h2>1. Ecrire un test</h2></a>
+<p>Pour écrire un test, il suffit de créer un fichier qui commence par &quot;<code>test_</code>&quot; dans le dossier &quot;<code>tests</code>&quot;: par exemple, &quot;<code>test_me.py</code>&quot;.</p>
+<p>Dans ce fichier, les fonctions commençant par &quot;<code>test_</code>&quot; seront exécutées en tant que cas de test.</p>
+<p>Dans <code>unittest</code>, il y a plusieurs façons de faire des assertions:</p>
+<ul>
+<li><code>self.assertTrue</code></li>
+<li><code>self.assertFalse</code></li>
+<li><code>self.assertEqual</code></li>
+<li><code>self.assertNotEqual</code></li>
+<li><code>self.assertIs</code></li>
+<li><code>self.assertIsNot</code></li>
+<li>...</li>
+</ul>
+<p>C'est un style populaire pour réaliser des assertions, car il permet à première vue de tester énormément de choses (et permet d'avoir plus d'infos quand le test échoue).
+Pytest lui n'a qu'une fonction d'assertion:</p>
+<ul>
+<li><code>assert</code></li>
+</ul>
+<p>Là comme ça, ça a l'air un peu limité, mais avec <code>assert</code> on peut tester n'importe quoi, il suffit de lui passer une expression booléenne.</p>
+<p><em>Exemple de fonction de test:</em></p>
+<pre><code class="language-python">def test_reverse():
+  assert &quot;azerty&quot;[::-1] == &quot;ytreza&quot;
+</code></pre>
+<p><em>Un autre test:</em></p>
+<pre><code class="language-python">def ma_fonction(a):
+  return a * a
+  
+def test_ma_fonction():
+  assert ma_fonction(1) == 1
+  assert ma_fonction(5) == 25
+</code></pre>
+<p><em>Exemple d'exécution de pytest:</em></p>
+<pre><code class="language-text">(venv) PS C:\Users\...\simple&gt; pytest
+=============================================== test session starts ====================================================
+platform win32 -- Python 3.7.1, pytest-4.3.1, py-1.8.0, pluggy-0.9.0 -- c:\users\...\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\...\simple, inifile: pytest.ini
+plugins: pythonpath-0.7.3, django-3.4.8, cov-2.6.1
+collected 1 item
+
+tests/test_simple.py::test_simple PASSED                                                                          [100%]
+
+=============================================== 1 passed in 0.03 seconds ===============================================
+(venv) PS C:\Users\...\simple&gt;
+</code></pre>
+<a class="header" href="#a2-la-gestion-des-erreurs" id="a2-la-gestion-des-erreurs"><h2>2. La gestion des erreurs</h2></a>
+<p>Là où <code>unittest</code> utilise des fonctions précises pour avoir de bons retours d'erreurs, on pourrait croire que pytest est moins bon avec son <code>assert</code> unique.
+Mais non:</p>
+<pre><code>(venv) PS C:\Users\...\simple&gt; pytest tests/test_simple.py::test_error
+========================================================== test session starts ==========================================================
+platform win32 -- Python 3.7.1, pytest-4.3.1, py-1.8.0, pluggy-0.9.0 -- c:\users\...\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\...\simple, inifile: pytest.ini
+plugins: pythonpath-0.7.3, django-3.4.8, cov-2.6.1
+collected 2 items
+run-last-failure: rerun previous 1 failure first
+
+tests/test_simple.py::test_error FAILED                                                                                            [ 50%]
+
+=============================================================== FAILURES ================================================================
+______________________________________________________________ test_error _______________________________________________________________
+
+    def test_error():
+&gt;       assert {&quot;a&quot;: 1, &quot;b&quot;: 5} == {&quot;a&quot;: 2}
+E       AssertionError: assert {'a': 1, 'b': 5} == {'a': 2}
+E         Differing items:
+E         {'a': 1} != {'a': 2}
+E         Left contains more items:
+E         {'b': 5}
+E         Full diff:
+E         - {'a': 1, 'b': 5}
+E         + {'a': 2}
+
+
+tests\test_simple.py:9: AssertionError
+======================================================= 1 failed in 0.09 seconds ========================================================
+(venv) PS C:\Users\...\simple&gt;
+</code></pre>
+<p>Pytest nous explique directement ce qui ne va pas.
+Il permet même de nous montrer l'état des variables de la fonction:</p>
+<pre><code>(venv) PS C:\Users\...\simple&gt; pytest tests/test_simple.py::test_variables_error
+========================================================== test session starts ==========================================================
+platform win32 -- Python 3.7.1, pytest-4.3.1, py-1.8.0, pluggy-0.9.0 -- c:\users\...\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\...\simple, inifile: pytest.ini
+plugins: pythonpath-0.7.3, django-3.4.8, cov-2.6.1
+collected 1 item
+
+tests/test_simple.py::test_variables_error FAILED                                                                                  [100%]
+
+=============================================================== FAILURES ================================================================
+_________________________________________________________ test_variables_error __________________________________________________________
+
+    def test_variables_error():
+        a = 1
+        b = 1
+        result = 3
+
+&gt;       assert a + b == result
+E       assert 2 == 3
+E         -2
+E         +3
+
+a          = 1
+b          = 1
+result     = 3
+
+tests\test_simple.py:17: AssertionError
+======================================================= 1 failed in 0.09 seconds ========================================================
+</code></pre>
+<p>C'est quand même super pratique !</p>
+<a class="header" href="#a3-les-fixtures" id="a3-les-fixtures"><h2>3. Les fixtures</h2></a>
+<a class="header" href="#a-cest-quoi-" id="a-cest-quoi-"><h3>a. C'est quoi ?</h3></a>
+<p>Sur des tests simples, il n'y a pas grand chose à écrire, du coup c'est concis et rapide.
+Sur des cas plus complexes, on peut avoir besoin de créer énormément de choses au préalable (surtout côté tests d'intégration).</p>
+<p>Pour limiter le code nécessaire à la création des scénarios, pytest propose une fonctionnalité super utile: les <code>fixtures</code>.</p>
+<p>Ceux qui connaissent déja un peu le monde du testing savent déjà ce qu'est une fixture côté base de données: ce sont des données à charger en DB avant l'exécution des tests.
+Dans le cas de pytest, les fixtures sont différentes. Ce ne sont pas nécessairement des &quot;données&quot;, et ce n'est pas nécessairement placé en base de données.</p>
+<p>Via les fixtures, on peut par exemple:</p>
+<ul>
+<li>automatiser la désactivation du SMTP pour empêcher l'envoi de mail dans chaque fonction,</li>
+<li>monkeypatcher certaines fonctions avant de démarrer un test,</li>
+<li>automatiser la création d'un cloud avant chaque test,</li>
+<li>créer un navigateur via selenium avant de commencer un test e2e,</li>
+<li>préparer un environnement où l'on crée une resource et un utilisateur pour pouvoir faire des réservations,</li>
+<li>on peut faire n'importe quoi finalement.</li>
+</ul>
+<p>Voici comment on déclare et appelle une fixture:</p>
+<pre><code class="language-python">import pytest
+
+@pytest.fixture
+def ma_fixture():
+  return {
+    &quot;a&quot;: 5,
+    &quot;b&quot;: 6
+  }
+  
+def test_ma_fixture(ma_fixture):
+  assert ma_fixture == {&quot;a&quot;: 5, &quot;b&quot;: 6}
+</code></pre>
+<a class="header" href="#b-Ça-va-où-" id="b-Ça-va-où-"><h3>b. Ça va où ?</h3></a>
+<p>Ces fixtures sont stockées à plusieurs endroits possibles:</p>
+<ul>
+<li>dans un ou plusieurs fichiers <code>conftest.py</code> (un fichier possible par path)</li>
+<li>directement dans un module de test <code>test_*.py</code></li>
+</ul>
+<p>En fonction de la position d'un module de test, les fixtures seront chargés au fil du parcours de l'arborescence pour aller jusqu'a ce test.</p>
+<p>Exemple:</p>
+<ul>
+<li>tests/
+<ul>
+<li>a/
+<ul>
+<li>conftest.py</li>
+<li>b/
+<ul>
+<li>conftest.py</li>
+<li>test_toto.py</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>b/
+<ul>
+<li>test_tutu.py</li>
+</ul>
+</li>
+<li>conftest.py</li>
+</ul>
+</li>
+</ul>
+<p>Sur cet exemple:</p>
+<ul>
+<li>le module <code>test_toto.py</code> va charger les fixtures des fichiers <code>conftest.py</code> de
+<ul>
+<li><code>tests/</code>,</li>
+<li><code>tests/a/</code>,</li>
+<li><code>tests/a/b/</code>,</li>
+</ul>
+</li>
+<li>alors que le module <code>test_tutu.py</code> va charger les fixtures des fichiers <code>conftest.py</code> de:
+<ul>
+<li><code>tests/</code>, c'est tout.</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="#c-les-scopes" id="c-les-scopes"><h3>c. Les scopes</h3></a>
+<p>Les fixtures peuvent avoir plusieurs &quot;scopes&quot;.</p>
+<ul>
+<li>Le scope <code>session</code>: la fixture va s'exécuter une seule fois avant toute la session de test
+<ul>
+<li>C'est utile pour les tâches qui prennent du temps, comme créer la DB avec mise en place des migrations</li>
+<li>Ou encore démarrage d'un serveur en arrière plan pour les tests e2e</li>
+</ul>
+</li>
+<li>Le scope <code>module</code>: pour un module (un fichier python), la fixture ne va s'exécuter qu'une seule fois par module.
+<ul>
+<li>C'est utile lorsque plusieurs tests nécessitent le même environnement au préalable: comme la création d'un cloud et d'une ressource pour faire plusieurs tests.</li>
+</ul>
+</li>
+<li>Le scope <code>class</code>: moins utilisé sur <code>pytest</code>, mais si vous voulez utiliser des classes comme avec <code>unittest</code>, ça revient à déclarer une fonction <code>tearDown</code> et <code>setUp</code> dans la classe.
+<ul>
+<li>En pratique on n'aura pas besoin de s'en servir, les 3 autres scopes sont plus flexibles.</li>
+</ul>
+</li>
+<li>Le scope <code>function</code>: c'est le scope par défaut, la fixture s'exécute avant le démarrage d'une fonction en particulier</li>
+</ul>
+<p>Voici des exemples:</p>
+<pre><code class="language-python"># Exemples
+
+@pytest.fixture(scope=&quot;session&quot;)
+def session_fixture():
+  return {
+    &quot;session_key&quot;: 1234
+  }
+ 
+@pytest.fixture(scope=&quot;module&quot;)
+def module_fixture():
+  return {
+    &quot;module_key&quot;: 7890
+  }
+  
+@pytest.fixture
+def function_fixture():
+  return {
+    &quot;function_key&quot;: 1902
+  }
+  
+def test_fix1(session_fixture, module_fixture, function_fixture):
+  # session_fixture va se créer
+  # module_fixture va se créer
+  # function_fixture va se créer
+  pass
+  
+def test_fix2():
+  # session_fixture existe déja
+  # module_fixture existe déja
+  # function_fixture va se créer
+  pass
+</code></pre>
+<a class="header" href="#d-setup--teardown" id="d-setup--teardown"><h3>d. Setup &amp; Teardown</h3></a>
+<p>Maintenant que vous savez comment construire une fixture (à la <code>setUp</code> côté <code>unittest</code>), vous vous demandez sûrement comment gérer sa destruction (<code>tearDown</code>) ?</p>
+<p>Avec une fixture classique, on ne peut que gérer la vie de la donnée avant qu'elle ne soit passée dans le test, mais pas après. Pour cela, il faut utiliser une fixture appelée <code>yield</code>, du nom du mot-clé Python qui permet de créer des générateurs (et des coroutines).</p>
+<p>Je vais pas trop rentrer dans le détail, mais c'est le même principe que pour un <code>context manager</code> (bloc <code>with</code>):</p>
+<pre><code class="language-python">from contextlib import contextmanager
+
+@contextmanager
+def mon_bloc():
+  # On déclare une variable
+  ma_var = 5
+  print(&quot;avant bloc&quot;)
+  
+  # On &quot;envoie&quot; la variable à l'extérieur du générateur
+  yield ma_var
+  
+  print(&quot;après bloc&quot;)
+  
+def ma_fonction():
+  # On appelle le context manager
+  with mon_bloc() as var:
+    # affiche &quot;avant bloc&quot;
+    print(var)
+    # affiche 5
+  # affiche &quot;après bloc&quot;
+</code></pre>
+<p>On va utiliser le même système pour la fixture:</p>
+<pre><code class="language-python">import pytest
+
+@pytest.yield_fixture
+def ma_fixture():
+  # On déclare une variable
+  ma_var = &quot;toto&quot;
+  
+  # On &quot;envoie&quot; la variable à l'extérieur du générateur
+  yield ma_var
+  
+  # On peut faire une action post-fixture, comme supprimer des entrées DB
+  db.clear()
+  
+def test_fixture(ma_fixture):
+  assert ma_fixture == &quot;toto&quot;
+  # à la fin du test, va supprimer les entrées DB
+</code></pre>
+<p><strong>Attention:</strong> La notation <code>@pytest.yield_fixture</code> est dépréciée: le décorateur <code>fixture</code> comprend désormais l'instruction <code>yield</code>. Il est donc préférable de directement utiliser <code>@pytest.fixture</code>. J'ai ici utilisé <code>@pytest.yield_fixture</code> pour montrer le rapport.</p>
+<a class="header" href="#e-lhéritage" id="e-lhéritage"><h3>e. L'héritage</h3></a>
+<p>Il est possible de mettre en place des dépendances entre les fixtures.
+Par contre, attention aux scopes:</p>
+<ul>
+<li>Il n'est pas possible pour une fixture de dépendre d'un scope plus petit
+<ul>
+<li>C'est à dire qu'un scope &quot;session&quot; ne peut pas dépendre d'un scope &quot;function&quot;.</li>
+<li>Mais le contraire oui.</li>
+</ul>
+</li>
+</ul>
+<p>Voici un exemple:</p>
+<pre><code class="language-python">@pytest.fixture(scope=&quot;session&quot;)
+def mon_cloud():
+  return Cloud()
+  
+@pytest.fixture
+def mon_user(mon_cloud):
+  return User(cloud=mon_cloud)
+  
+def test_fix(mon_user):
+  # mon_user va automatiquement utiliser mon_cloud
+  pass
+  
+def test_fix2(mon_user, mon_cloud):
+  # mon_cloud existe déja dans mon_user, ici on récupère juste une référence
+  assert mon_user.cloud == mon_cloud
+</code></pre>
+<p>Voici un exemple qui ne marche pas:</p>
+<pre><code class="language-python">@pytest.fixture
+def mon_cloud():
+  return Cloud()
+  
+@pytest.fixture(scope=&quot;session&quot;)
+def mon_user(mon_cloud):
+  # ça va casser, mon_cloud étant d'un scope plus petit
+  pass
+</code></pre>
+<a class="header" href="#f-bonus" id="f-bonus"><h3>f. Bonus</h3></a>
+<p>Petite commande bonus: on peut afficher les étapes de &quot;setup&quot; et de &quot;teardown&quot; des fixtures lors de l'exécution des tests.</p>
+<p>Attention c'est un peu verbeux:</p>
+<pre><code>(venv) PS C:\Users\...\simple&gt; pytest --setup-show
+=============================================== test session starts ================================================
+platform win32 -- Python 3.7.1, pytest-4.3.1, py-1.8.0, pluggy-0.9.0 -- c:\users\...\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\...\simple, inifile: pytest.ini
+plugins: pythonpath-0.7.3, django-3.4.8, cov-2.6.1
+collected 2 items
+
+tests/test_scopes.py::test_fix1
+SETUP    S _fail_for_invalid_template_variable
+SETUP    S django_test_environment
+SETUP    S session_fixture
+SETUP    S django_db_blocker
+    SETUP    M module_fixture
+      SETUP    C _django_setup_unittest (fixtures used: django_db_blocker)
+        SETUP    F _dj_autoclear_mailbox
+        SETUP    F _django_clear_site_cache
+        SETUP    F _django_db_marker
+        SETUP    F _django_set_urlconf
+        SETUP    F _live_server_helper
+        SETUP    F _template_string_if_invalid_marker
+        SETUP    F function_fixture
+        tests/test_scopes.py::test_fix1 (fixtures used: _dj_autoclear_mailbox, _django_clear_site_cache, _django_db_marker, _django_set_urlconf, _django_setup_unittest, _fail_for_invalid_template_variable, _live_server_helper, _template_string_if_invalid_marker, django_db_blocker, django_test_environment, function_fixture, module_fixture, session_fixture)PASSED
+        TEARDOWN F function_fixture
+        TEARDOWN F _template_string_if_invalid_marker
+        TEARDOWN F _live_server_helper
+        TEARDOWN F _django_set_urlconf
+        TEARDOWN F _django_db_marker
+        TEARDOWN F _django_clear_site_cache
+        TEARDOWN F _dj_autoclear_mailbox
+      TEARDOWN C _django_setup_unittest
+tests/test_scopes.py::test_fix2
+      SETUP    C _django_setup_unittest (fixtures used: django_db_blocker)
+        SETUP    F _dj_autoclear_mailbox
+        SETUP    F _django_clear_site_cache
+        SETUP    F _django_db_marker
+        SETUP    F _django_set_urlconf
+        SETUP    F _live_server_helper
+        SETUP    F _template_string_if_invalid_marker
+        tests/test_scopes.py::test_fix2 (fixtures used: _dj_autoclear_mailbox, _django_clear_site_cache, _django_db_marker, _django_set_urlconf, _django_setup_unittest, _fail_for_invalid_template_variable, _live_server_helper, _template_string_if_invalid_marker, django_db_blocker, django_test_environment)PASSED
+        TEARDOWN F _template_string_if_invalid_marker
+        TEARDOWN F _live_server_helper
+        TEARDOWN F _django_set_urlconf
+        TEARDOWN F _django_db_marker
+        TEARDOWN F _django_clear_site_cache
+        TEARDOWN F _dj_autoclear_mailbox
+      TEARDOWN C _django_setup_unittest
+    TEARDOWN M module_fixture
+TEARDOWN S django_db_blocker
+TEARDOWN S django_test_environment
+TEARDOWN S _fail_for_invalid_template_variable
+TEARDOWN S session_fixture
+
+============================================= 2 passed in 0.12 seconds =============================================
+(venv) PS C:\Users\...\simple&gt;
+</code></pre>
+<p>On discerne bien toutes les fixtures utilisées, avec les scopes (S pour <code>session</code>, M pour <code>module</code>, C pour <code>class</code> et F pour <code>function</code>).</p>
+<a class="header" href="#section-4---aperçu-de-lapplication" id="section-4---aperçu-de-lapplication"><h1>Section 4 - Aperçu de l'application</h1></a>
+<p>On va maintenant expérimenter sur une application Django.</p>
+<p>Elle est disponible dans le dossier <code>examples/web-app</code>.</p>
+<p>C'est une application très pauvre fonctionnellement, on peut juste s'enregistrer/se connecter et incrémenter son compteur de clicks avec un bouton.</p>
+<p><img src="./images/clicks.png" alt="clicks" /></p>
+<p>Le but premier de cette application est d'utiliser <code>pytest</code>.</p>
+<p>Pour démarrer l'application, il faut avoir chargé le virtualenv, aller dans le dossier <code>examples/web-app</code> puis:</p>
+<pre><code class="language-bash">python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
+</code></pre>
+<p>Faites le tour des fonctionnalités de l'application, puis exécutez les tests:</p>
+<pre><code class="language-bash">pytest
+</code></pre>
+<p>Vous devriez avoir un résultat de ce type, avec des tests qui plantent:</p>
+<pre><code>(venv) PS C:\Users\...\web-app&gt; pytest
+=============================================== test session starts ================================================
+platform win32 -- Python 3.7.1, pytest-4.3.1, py-1.8.0, pluggy-0.9.0 -- c:\users\...\python.exe
+cachedir: .pytest_cache
+Django settings: testme_project.settings (from ini file)
+rootdir: C:\Users\...\web-app, inifile: pytest.ini
+plugins: pythonpath-0.7.3, django-3.4.8, cov-2.6.1
+collected 10 items
+run-last-failure: rerun previous 5 failures first
+
+tests/test_api.py::test_api_addme FAILED                                                                      [ 10%]
+tests/test_api.py::test_api_base64me FAILED                                                                   [ 20%]
+tests/test_profile.py::test_profile_reset_clicks FAILED                                                       [ 30%]
+tests/test_profile.py::test_profile_clicks_to_stream FAILED                                                   [ 40%]
+tests/e2e/test_e2e.py::test_home
+DevTools listening on ws://127.0.0.1:18187/devtools/browser/fa679536-3af4-4b06-beb9-ef09bfb9c0db
+FAILED                                                                       [ 50%]
+tests/test_api.py::test_api_clickme PASSED                                                                    [ 60%]
+tests/test_profile.py::test_profile_default PASSED                                                            [ 70%]
+tests/test_profile.py::test_profile_zero_clicks PASSED                                                        [ 80%]
+tests/test_profile.py::test_profile_add_click PASSED                                                          [ 90%]
+tests/e2e/test_e2e.py::test_login
+DevTools listening on ws://127.0.0.1:18214/devtools/browser/bde370e3-4913-497b-a571-c38be8cfa536
+PASSED                                                                      [100%]
+
+...
+</code></pre>
+<p>Il est possible que vos tests ne soient pas exécutés dans le même ordre, mais c'est pas bien grave.</p>
+<p>A la suite de ces lignes de résumé, vous devez avoir un petit tas d'erreurs avec du contexte, plantant à chaque fois sur un <code>assert False</code>.</p>
+<p>Prenez le temps de regarder la définition de ces tests pour bien comprendre comment tout fonctionne.</p>
+<a class="header" href="#section-5---a-votre-tour" id="section-5---a-votre-tour"><h1>Section 5 - A votre tour</h1></a>
+<p>C'est à votre tour de tester !</p>
+<p>Réparez les tests qui plantent en vous aidant des commentaires et virez les TODOs.</p>
+<p>Hésitez pas à demander de l'aide et bonne chance !</p>
+<p style="text-align: center; margin-top: 5em;">
+  <img src="https://i-h1.pinimg.com/474x/33/52/87/33528736e35debe64cffaf15d1696445--good-luck-meme.jpg" alt="good luck" />
+</p>
 
                     </main>
 

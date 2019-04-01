@@ -37,7 +37,7 @@ def test_api_addme(rf: RequestFactory):
 
     # Response should be a JsonResponse
     # It should return the sum of two numbers
-    pass
+    assert False
 
 
 # TODO: Create the test
@@ -50,4 +50,4 @@ def test_api_base64me(rf: RequestFactory):
 
     # Response should be a JsonResponse
     # It should return the base64 encoding of a source string
-    pass
+    assert False
