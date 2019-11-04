@@ -26,9 +26,9 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
+
+
     </head>
     <body class="light">
         <!-- Provide site root to javascript -->
@@ -53,7 +53,7 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = 'light'; }
             document.body.className = theme;
             document.querySelector('html').className = theme + ' js';
@@ -78,7 +78,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
+
                 <div id="menu-bar" class="menu-bar">
                     <div id="menu-bar-sticky-container">
                         <div class="left-buttons">
@@ -95,14 +95,14 @@
                                 <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                             </ul>
-                            
+
                             <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                                 <i class="fa fa-search"></i>
                             </button>
-                            
+
                         </div>
 
-                        <h1 class="menu-title">Coding Dojo - Testing</h1> 
+                        <h1 class="menu-title">Coding Dojo - Testing</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
 
-                
+
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
                         <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
@@ -123,7 +123,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -194,8 +194,8 @@ Un <em>virtualenv</em> est une sorte d'installation Python <em>indépendante</em
 <ul>
 <li>le <a href="https://docs.pytest.org/en/latest/getting-started.html">site officiel</a></li>
 <li>la doc du module <a href="https://pytest-django.readthedocs.io/en/latest/">pytest-django</a></li>
-<li>le livre <a href="https://books.sharingdev.com/read/120/pdf">TDD with Python</a>, pour un guide complet autour du testing en Python</li>
-<li>et le livre <a href="https://books.sharingdev.com/read/161/pdf">Python Testing with pytest</a>, pour un guide autour de Pytest</li>
+<li>le livre <b>TDD with Python</b>, pour un guide complet autour du testing en Python</li>
+<li>et le livre <b>Python Testing with pytest</b>, pour un guide autour de Pytest</li>
 </ul>
 <a class="header" href="#section-2---les-types-de-tests" id="section-2---les-types-de-tests"><h1>Section 2 - Les types de tests</h1></a>
 <p>Avant de commencer à tester, on va voir différents types de tests (plus d'infos sur <a href="https://sharingcloud.atlassian.net/wiki/spaces/SKB/pages/859439125/1.3.+Tests+et+couverture">le wiki</a>).</p>
@@ -216,7 +216,7 @@ Un <em>virtualenv</em> est une sorte d'installation Python <em>indépendante</em
 <p>Les tests end-to-end vérifient le comportement d'une application dans sa globalité, en mode boîte noire. Le plus souvent, on passe par des outils comme <code>selenium</code> qui nous apporte une API autour d'un navigateur, pour exécuter des actions comme appuyer sur un bouton, récupérer un élément du DOM et vérifier des comportements. Ce sont les plus longs et les plus compliqués à écrire, mais ça permet de faire des tests qui se rapprochent du comportement d'un utilisateur en face de son appareil.</p>
 <p>Ces tests ne remplacent pas tous les tests fonctionnels réalisés &quot;à la main&quot;, mais ils peuvent être très utiles pour automatiser certaines tâches répétitives.</p>
 <pre><code class="language-python">def test_e2e(browser):
-  browser.navigate_to(&quot;/toto&quot;)  
+  browser.navigate_to(&quot;/toto&quot;)
   assert browser.check_url(&quot;/toto&quot;)
 
   element = browser.find_element_by_css_selector(&quot;#my-elem&quot;)
@@ -252,7 +252,7 @@ Pytest lui n'a qu'une fonction d'assertion:</p>
 <p><em>Un autre test:</em></p>
 <pre><code class="language-python">def ma_fonction(a):
   return a * a
-  
+
 def test_ma_fonction():
   assert ma_fonction(1) == 1
   assert ma_fonction(5) == 25
@@ -362,7 +362,7 @@ def ma_fixture():
     &quot;a&quot;: 5,
     &quot;b&quot;: 6
   }
-  
+
 def test_ma_fixture(ma_fixture):
   assert ma_fixture == {&quot;a&quot;: 5, &quot;b&quot;: 6}
 </code></pre>
@@ -441,25 +441,25 @@ def session_fixture():
   return {
     &quot;session_key&quot;: 1234
   }
- 
+
 @pytest.fixture(scope=&quot;module&quot;)
 def module_fixture():
   return {
     &quot;module_key&quot;: 7890
   }
-  
+
 @pytest.fixture
 def function_fixture():
   return {
     &quot;function_key&quot;: 1902
   }
-  
+
 def test_fix1(session_fixture, module_fixture, function_fixture):
   # session_fixture va se créer
   # module_fixture va se créer
   # function_fixture va se créer
   pass
-  
+
 def test_fix2():
   # session_fixture existe déja
   # module_fixture existe déja
@@ -477,12 +477,12 @@ def mon_bloc():
   # On déclare une variable
   ma_var = 5
   print(&quot;avant bloc&quot;)
-  
+
   # On &quot;envoie&quot; la variable à l'extérieur du générateur
   yield ma_var
-  
+
   print(&quot;après bloc&quot;)
-  
+
 def ma_fonction():
   # On appelle le context manager
   with mon_bloc() as var:
@@ -498,13 +498,13 @@ def ma_fonction():
 def ma_fixture():
   # On déclare une variable
   ma_var = &quot;toto&quot;
-  
+
   # On &quot;envoie&quot; la variable à l'extérieur du générateur
   yield ma_var
-  
+
   # On peut faire une action post-fixture, comme supprimer des entrées DB
   db.clear()
-  
+
 def test_fixture(ma_fixture):
   assert ma_fixture == &quot;toto&quot;
   # à la fin du test, va supprimer les entrées DB
@@ -525,15 +525,15 @@ Par contre, attention aux scopes:</p>
 <pre><code class="language-python">@pytest.fixture(scope=&quot;session&quot;)
 def mon_cloud():
   return Cloud()
-  
+
 @pytest.fixture
 def mon_user(mon_cloud):
   return User(cloud=mon_cloud)
-  
+
 def test_fix(mon_user):
   # mon_user va automatiquement utiliser mon_cloud
   pass
-  
+
 def test_fix2(mon_user, mon_cloud):
   # mon_cloud existe déja dans mon_user, ici on récupère juste une référence
   assert mon_user.cloud == mon_cloud
@@ -542,7 +542,7 @@ def test_fix2(mon_user, mon_cloud):
 <pre><code class="language-python">@pytest.fixture
 def mon_cloud():
   return Cloud()
-  
+
 @pytest.fixture(scope=&quot;session&quot;)
 def mon_user(mon_cloud):
   # ça va casser, mon_cloud étant d'un scope plus petit
@@ -664,9 +664,9 @@ PASSED                                                                      [100
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
+
+
 
                         <div style="clear: both"></div>
                     </nav>
@@ -674,41 +674,41 @@ PASSED                                                                      [100
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
+
+
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
+
+
+
+
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+
 
         <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
-        
+
+
+
         <script type="text/javascript">
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
+
+
 
     </body>
 </html>

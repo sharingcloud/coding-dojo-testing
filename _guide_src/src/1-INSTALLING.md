@@ -67,5 +67,5 @@ Pour la documentation autour de `pytest`, je recommande:
 
 - le [site officiel](https://docs.pytest.org/en/latest/getting-started.html)
 - la doc du module [pytest-django](https://pytest-django.readthedocs.io/en/latest/)
-- le livre [TDD with Python](https://books.sharingdev.com/read/120/pdf), pour un guide complet autour du testing en Python
-- et le livre [Python Testing with pytest](https://books.sharingdev.com/read/161/pdf), pour un guide autour de Pytest
+- le livre **TDD with Python**, pour un guide complet autour du testing en Python
+- et le livre **Python Testing with pytest**, pour un guide autour de Pytest
