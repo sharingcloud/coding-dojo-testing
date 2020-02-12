@@ -1,4 +1,4 @@
-# ALl
+# All
 ipython<7.3
 ipdb<0.12
 flake8<4
@@ -11,5 +11,5 @@ pytest-pythonpath<1
 questionary<1.1
 
 # Web
-Django<2.2
+django==2.2.10
 selenium<4
