@@ -11,5 +11,5 @@ pytest-pythonpath<1
 questionary<1.1
 
 # Web
-django==2.2.10
+django==2.2.27
 selenium<4
